@@ -1,0 +1,122 @@
+<%-include("../layouts/header.ejs")-%>
+
+<section class="vh-100 bg-image">
+<div class="mask d-flex align-items-center h-100 gradient-custom-3">
+  <div class="container ">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+
+      <div style="margin-left: 1000px;">
+        <p class=" text-white-50 mt-5 mb-5  text-center"> <a href="/adminPannel" 
+            class="fw-bold text-white  text-center px-3 py-2 card-glow" >Back to Dashboard</a></p>
+    </div>
+    
+      <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+        <div class="card bg-black bg-opacity-10 text-white  " style="border-radius: 15px;">
+          <div class="card-body    p-5" >
+            <h2 class="text-uppercase text-center mb-5">Edit User Details</h2>
+
+            <div>
+              
+
+            <%
+            if(typeof message !== 'undefined'){
+              %>
+              <p class="text-warning text-center" id="msg-hide"><%= message %></p>
+              <%
+            }
+            %>
+
+
+
+            </div>
+
+            <form action="/updateUser" method="post" onsubmit="return validateForm()" name="editForm" >
+
+                <input type="hidden" name="ID" value="<%= user.id %>">
+
+              <div class="form-outline form-white mb-4">
+                <label for="">Edit Name</label>
+                <input type="text" name="name" id="form3Example1cg" class="form-control form-control-lg" value="<%= user.name %>" required  />
+               
+              </div>
+
+              <div class="form-outline form-white mb-4">
+                <label for="">Edit Email</label>
+                <input type="email" name="email" id="form3Example3cg" class="form-control form-control-lg" required value="<%= user.email %>" />
+                
+              </div>
+
+             
+
+             
+
+             
+
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="btn  btn-block btn-lg gradient-custom-4 text-white glow-on-hover">Update User</button>
+
+              </div>
+              
+
+              
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<script>
+  function validateForm() {
+  let x = document.forms["editForm"]["name,email"].value;
+  if (x == "") {
+    alert("Name must be filled out");
+    return false;
+  }
+} 
+</script>
+
+<script>
+
+function hidemsg(){
+ const msg= document.getElementById("msg-hide")
+ if(msg){
+  setTimeout(()=>{
+  msg.style.display = "none"
+ }, 3000)
+ }
+}
+window.onload= hidemsg;
+
+function password_show_hide() {
+var x = document.getElementById("password");
+var show_eye = document.getElementById("show_eye");
+var hide_eye = document.getElementById("hide_eye");
+show_eye.classList.remove("d-none");
+// hide_eye.classList.remove("d-none");
+if (x.type === "password") {
+x.type = "text";
+show_eye.style.display = "block";
+hide_eye.style.display = "none";
+} else {
+x.type = "password";
+show_eye.style.display = "block";
+hide_eye.style.display = "none";
+}
+}
+</script>
+
+
+
+
+
+
+
+
+
+<%-include("../layouts/footer.ejs")-%>

@@ -1,0 +1,57 @@
+
+%-include("../layouts/header.ejs")-%>
+
+<h1 class="text-center text-white">Admin Pannel</h1>
+<table class="table table-dark " id="myTable">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% userList.forEach(function(data) { %>
+       
+      <tr>
+        
+        <td><%= data.name %></td>
+        <td><%= data.email %></td>
+        <td>
+          <span>
+            <a class="btn btn-danger mx-1" href="/deleteUser/<%= data._id %>">Deleta</a>
+          </span>
+          <span>
+            <a class="btn btn-success mx-1 px-4" href="/editUser/<%= data._id %>">Edit</a>
+          </span>
+        </td>
+      </tr>
+       <% }) %>
+       
+    </tbody>
+  </table>
+
+  <script>
+    // Get the table
+  const table = document.getElementById("myTable");
+  
+  // Get all rows in the table body
+  const rows = table.getElementsByTagName("tr");
+  
+  // Start the serial number from 1 (skip the header row)
+  let serialNumber = 1;
+  
+  // Loop through rows and add serial numbers
+  for (let i = 1; i < rows.length; i++) {
+    const cell = document.createElement("td");
+    cell.textContent = serialNumber++;
+    
+    // Insert the serial number as the first cell in each row
+    rows[i].insertBefore(cell, rows[i].firstChild);
+  }
+  
+  </script>
+
+
+  <%-include("../layouts/footer.ejs")-%> 
